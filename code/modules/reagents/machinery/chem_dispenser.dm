@@ -31,6 +31,14 @@
 	)
 	var/list/hacked_reagents = list()
 	var/obj/item/weapon/reagent_containers/beaker = null
+	var/list/emag_reagents = list("tricordrazine", "tramadol")
+
+/obj/machinery/chemical_dispenser/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		emagged = 1
+		to_chat(user, SPAN_NOTICE("You disable the safety protocols."))
+		playsound(src.loc, "sparks", 60, 1)
+		dispensable_reagents += emag_reagents
 
 /obj/machinery/chemical_dispenser/RefreshParts()
 	cell = locate() in component_parts
@@ -174,6 +182,7 @@
 	density = FALSE
 	dispensable_reagents = list("water","ice","coffee","cream","tea","greentea","icetea","icegreentea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 	hacked_reagents = list("thirteenloko","grapesoda")
+	emag_reagents = list("thirteenloko","grapesoda")
 
 /obj/machinery/chemical_dispenser/soda/attackby(obj/item/I, mob/living/user)
 	..()
@@ -197,6 +206,7 @@
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
 	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 	hacked_reagents = list("goldschlager","patron","watermelonjuice","berryjuice")
+	emag_reagents = list("goldschlager","patron","watermelonjuice","berryjuice")
 
 /obj/machinery/chemical_dispenser/beer/attackby(obj/item/I, mob/living/user)
 	..()
@@ -238,3 +248,4 @@
 		"iron","radium","sacid",
 		"hclacid","silicon","tungsten"
 	)
+	emag_reagents = list("foaming_agent", "pacid")
